@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: get /var/log/messages
+    ansible.builtin.shell:
+      cmd: tail -20 /var/log/messages
+    register: output
+  - name: show log file
+    ansible.builtin.debug:
+      msg: "{{ output.stdout_lines }}"
