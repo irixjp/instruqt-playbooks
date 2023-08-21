@@ -2,7 +2,7 @@
 - hosts: all
   become: true
   vars:
-    logflile_path: "{{ survey_input_path | default('/var/log/messages') }}"
+    logfile_path: "{{ survey_input_path | default('/var/log/messages') }}"
   tasks:
   - name: get {{ logfile_path }}
     ansible.builtin.shell:
