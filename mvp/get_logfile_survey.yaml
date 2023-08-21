@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  vars:
+    logflile_path: "{{ survey_input_path | default('/var/log/messages') }}"
+  tasks:
+  - name: get {{ logfile_path }}
+    ansible.builtin.shell:
+      cmd: tail -20 {{ logfile_path }}
+    register: output
+  - name: show log file {{ logfile_path }}
+    ansible.builtin.debug:
+      msg: "{{ output.stdout_lines }}"
